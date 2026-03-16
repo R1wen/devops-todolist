@@ -36,6 +36,22 @@ class TodoList {
     }
     return this.todos.splice(index, 1)[0];
   }
+
+  updateTodo(id, newTitle) {
+    if (!newTitle || newTitle.trim() === '') {
+      throw new Error('Title cannot be empty');
+    }
+    const todo = this.todos.find(t => t.id === id);
+    if (!todo) {
+      throw new Error('Todo not found');
+    }
+    todo.title = newTitle.trim();
+    return todo;
+  }
+
+  getCompletedTodos() {
+    return this.todos.filter(t => t.completed === true);
+  }
 }
 
 module.exports = TodoList;
